@@ -7,3 +7,4 @@ if not os.path.exists(path+"log.txt"):
             os.mkdir(path+folders[i])
         file.write("Initialised Folders")
         
+        
