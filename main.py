@@ -5,12 +5,25 @@ from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
 class eventHandler(PatternMatchingEventHandler):
-    patterns=["*.jpg","*.png","*.zip"]
+    patterns=["*.jpg","*.png","*.zip","*.gif","*.mkv","*.mp4","*.wmv","*.pdf","*.doc","*.doc","*.xl","*.tar"]
 
     def process(self,event):
-        if ".zip" or ".tar" in event.src_path:
+        if ".png" or ".jpg" or ".gif" in event.src_path:
+           fileName=event.src_path.replace(pathDownloads,"")
+           os.rename(pathDownloads+fileName,pathDownloads+"Images/"+fileName)
+
+        elif ".mkv" or ".mp4" or "wmv" in event.src_path:
+           fileName=event.src_path.replace(pathDownloads,"")
+           os.rename(pathDownloads+fileName,pathDownloads+"Videos/"+fileName)
+
+        elif ".pdf" or ".doc" or "xl" in event.src_path:
+           fileName=event.src_path.replace(pathDownloads,"")
+           os.rename(pathDownloads+fileName,pathDownloads+"Documents/"+fileName)   
+
+        elif ".zip" or ".tar" in event.src_path:
            fileName=event.src_path.replace(pathDownloads,"")
            os.rename(pathDownloads+fileName,pathDownloads+"Zip Files/"+fileName)
+
 
 
 
@@ -21,8 +34,8 @@ class eventHandler(PatternMatchingEventHandler):
 
 
 
-folders=["Videos","Images","Documents","Apps","Zip Files"]
-pathDownloads="/home/nardog/Downloads/"
+folders=["Videos","Images","Documents","Zip Files"]
+pathDownloads="/home/"+sys.argv[1]+"/Downloads/"
 
 
 if not os.path.exists(pathDownloads+"log.txt"):
