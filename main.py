@@ -13,7 +13,7 @@ class eventHandler(PatternMatchingEventHandler):
            fileName=event.src_path.replace(pathDownloads,"")
            os.rename(pathDownloads+fileName,pathDownloads+"Images/"+fileName)
 
-        if "*.mp4" in event.src_path:
+        elif "*.mp4" in event.src_path:
            fileName=event.src_path.replace(pathDownloads,"")
            os.rename(pathDownloads+fileName,pathDownloads+"Videos/"+fileName)
 
@@ -21,7 +21,7 @@ class eventHandler(PatternMatchingEventHandler):
            fileName=event.src_path.replace(pathDownloads,"")
            os.rename(pathDownloads+fileName,pathDownloads+"Documents/"+fileName)   
 
-        if ".zip" in event.src_path:
+        elif ".zip" in event.src_path:
            fileName=event.src_path.replace(pathDownloads,"")
            os.rename(pathDownloads+fileName,pathDownloads+"ZipFiles/"+fileName)
 
