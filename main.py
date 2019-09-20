@@ -5,24 +5,25 @@ from watchdog.observers import Observer
 from watchdog.events import PatternMatchingEventHandler
 
 class eventHandler(PatternMatchingEventHandler):
-    patterns=["*.jpg","*.png","*.zip","*.gif","*.mkv","*.mp4","*.wmv","*.pdf","*.doc","*.doc","*.xl","*.tar"]
+    patterns="*"
 
     def process(self,event):
-        if ".png" or ".jpg" or ".gif" in event.src_path:
+        print(event.src_path)
+        if "*.png" in event.src_path:
            fileName=event.src_path.replace(pathDownloads,"")
            os.rename(pathDownloads+fileName,pathDownloads+"Images/"+fileName)
 
-        elif ".mkv" or ".mp4" or "wmv" in event.src_path:
+        if "*.mp4" in event.src_path:
            fileName=event.src_path.replace(pathDownloads,"")
            os.rename(pathDownloads+fileName,pathDownloads+"Videos/"+fileName)
 
-        elif ".pdf" or ".doc" or "xl" in event.src_path:
+        elif "*.pdf" in event.src_path:
            fileName=event.src_path.replace(pathDownloads,"")
            os.rename(pathDownloads+fileName,pathDownloads+"Documents/"+fileName)   
 
-        elif ".zip" or ".tar" in event.src_path:
+        if ".zip" in event.src_path:
            fileName=event.src_path.replace(pathDownloads,"")
-           os.rename(pathDownloads+fileName,pathDownloads+"Zip Files/"+fileName)
+           os.rename(pathDownloads+fileName,pathDownloads+"ZipFiles/"+fileName)
 
 
 
@@ -34,7 +35,7 @@ class eventHandler(PatternMatchingEventHandler):
 
 
 
-folders=["Videos","Images","Documents","Zip Files"]
+folders=["Videos","Images","Documents","ZipFiles"]
 pathDownloads="/home/"+sys.argv[1]+"/Downloads/"
 
 
@@ -55,4 +56,4 @@ try:
         time.sleep(1)
 except KeyboardInterrupt:
     observer.stop()
-observer.join()
+    observer.join()
