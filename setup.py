@@ -13,7 +13,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyorganise",
-    version="0.0.1",
+    version="0.0.3",
     author="Vishnu Prakash",
     author_email="visheh10@gmail.com",
     description="A lightweight solution to organise your folders and files",
@@ -21,6 +21,10 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/bat-fleck/pyOrganize",
     packages=setuptools.find_packages(),
+      install_requires=[         
+          'watchdog',
+      ],
+
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
