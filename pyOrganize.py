@@ -27,7 +27,10 @@ class eventHandler(PatternMatchingEventHandler):
 
     def process(self,event):
         print(event.src_path)
-        if not (event.src_path).endswith(".part"):
+        if (event.src_path.endswith(".part")):
+            print("Yeeee")
+            pass
+        else:
             fileName=event.src_path.replace(pathDownloads,"")
             os.rename(pathDownloads+fileName,pathDownloads+".Temp/"+fileName)
             self.sort()
@@ -56,7 +59,7 @@ if __name__ == "__main__":
 
     try:
         while True:
-            time.sleep(1)
+            time.sleep(5)
     except KeyboardInterrupt:
         observer.stop()
         observer.join()
