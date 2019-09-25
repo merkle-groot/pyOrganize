@@ -1,0 +1,7 @@
+README.md
+setup.py
+pyorganise/__init__.py
+pyorganise.egg-info/PKG-INFO
+pyorganise.egg-info/SOURCES.txt
+pyorganise.egg-info/dependency_links.txt
+pyorganise.egg-info/top_level.txt
