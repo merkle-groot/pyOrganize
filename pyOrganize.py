@@ -26,14 +26,35 @@ class eventHandler(PatternMatchingEventHandler):
 
 
     def process(self,event):
-        print(event.src_path)
-        if (event.src_path.endswith(".part")):
-            print("Yeeee")
-            pass
-        else:
-            fileName=event.src_path.replace(pathDownloads,"")
-            os.rename(pathDownloads+fileName,pathDownloads+".Temp/"+fileName)
+        if event.src_path.endswith(".part",".cr"):
+            filePath=event.src_path.replace(".part","") #Path of the actual file
+            fileName=event.src_path.replace(pathDownloads,"") #Just the name of the original file
+            fileOriginal=fileName.replace(".part","")
+            print(fileName)
+            while os.stat(filePath).st_size==0 or os.path.exists(event.src_path):
+                print("Downloading......") 
+                time.sleep(3)
+            print("file downloaded")
+            os.rename(pathDownloads+fileOriginal,pathDownloads+".Temp/"+fileOriginal)
             self.sort()
+
+        elif not event.src_path.endswith(".part"):
+            time.sleep(1)
+            if not os.path.exists(event.src_path+".part"):
+                print("smol file")
+                fileName=event.src_path.replace(pathDownloads,"")
+                print(fileName)
+                os.rename(pathDownloads+fileName,pathDownloads+".Temp/"+fileName)
+                self.sort()
+            # print(filename)
+            # time.sleep(3)
+            # while
+            # os.stat(filename-".part")!=0:
+            #     print("yeeeeeeeeeee")
+            
+            # fileName=event.src_path.replace(pathDownloads,"")
+            # os.rename(pathDownloads+fileName,pathDownloads+".Temp/"+fileName)
+            # self.sort()
 
     def on_created(self,event):
         self.process(event)
@@ -59,7 +80,7 @@ if __name__ == "__main__":
 
     try:
         while True:
-            time.sleep(5)
+            time.sleep(1)
     except KeyboardInterrupt:
         observer.stop()
         observer.join()
